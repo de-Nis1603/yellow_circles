@@ -1,19 +1,17 @@
 import random
 import sys
-
-from PyQt5 import uic
+from PyQt5.QtGui import QPainter, QColor
+from PyQt5.QtCore import QPointF
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtGui import QPainter
-from PyQt5.QtCore import Qt, QPointF
+from ui_file import Ui_MainWindow
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Ui.ui', self)
+        self.setupUi(self)
         self.activated = 'nothing'
         self.pushButton.clicked.connect(self.run)
-        self.resize(900, 700)
 
     def run(self):
         self.activated = "circle"
@@ -23,13 +21,14 @@ class MyWidget(QMainWindow):
         super().paintEvent(event)
         if self.activated == 'circle':
             painter = QPainter(self)
-            painter.setBrush(Qt.yellow)
+            r = random.randrange(256)
+            g = random.randrange(256)
+            b = random.randrange(256)
+            painter.setBrush(QColor(r, g, b))
             radius = random.randrange(300)
             center_x = random.randrange(radius, self.width() - radius)
             center_y = random.randrange(radius, self.height() - radius)
-            print(0)
             center = QPointF(center_x, center_y)
-            print(radius, center_x, center_y)
             painter.drawEllipse(center, radius, radius)
             self.activated = 'nothing'
 

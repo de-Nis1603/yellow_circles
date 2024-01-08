@@ -28,7 +28,7 @@ class MyWidget(QMainWindow, Ui_MainWindow):
             radius = random.randrange(300)
             center_x = random.randrange(radius, self.width() - radius)
             center_y = random.randrange(radius, self.height() - radius)
-            center = QPointF(center_x, center_y)
+            center = QPointF(center_x, center_y) #
             painter.drawEllipse(center, radius, radius)
             self.activated = 'nothing'
 
